@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if results %}
+        <ul>
+        {% for result in results %}
+            <li>
+                <form action="/web/process?{{ result['name'] }}" method=get>
+                {{ result['name'] }} - 
+                workers: <input type="text" name="workers" size=4>
+                <input type=submit value=Process>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <form action="/web/upload" method=post enctype=multipart/form-data>
+        <h1>Upload new File</h1>
+            <!-- figure out multiple -->
+            <p><input type=file name=file>
+            <input type=submit value=Upload>
+        </form>
+    {% endif %}
+{% endblock %}
